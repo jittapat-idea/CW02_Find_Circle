@@ -43,21 +43,27 @@ def check_pixel_values(image, radius):
     for row in range(height):
         for col in range(width):
             pixel_value = image[row, col]
-            if pixel_value > 229 and used_pixels[row, col] == 0:
+            if pixel_value > 175 and used_pixels[row, col] == 0 :
                 draw_circle(image, col, row, radius)
                 used_pixels[row-radius:row+radius, col-radius:col+radius] = 255  # ทำเครื่องหมายว่าพิกัดนี้ถูกใช้แล้ว
+    
 
 # กำหนดพิกัดและขนาดของวงกลม
-radius = 59
+radius = 61
 
 image = cv2.imread('pic/CircleCW02.png', cv2.IMREAD_GRAYSCALE)
 # image = cv2.equalizeHist(image)
+output = cv2.medianBlur(image,25)
+# threshold
+thresh = cv2.threshold(output, 175, 255, cv2.THRESH_BINARY)[1]
+# cv2.imshow("THRESH", thresh)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
-
-check_pixel_values(image, radius)
+check_pixel_values(thresh, radius)
 
 # แสดงภาพที่ผ่านการสร้างวงกลม
-cv2.imshow('Circle Image', image)
+cv2.imshow('Circle Image', thresh )
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
