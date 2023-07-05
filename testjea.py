@@ -14,7 +14,7 @@ def check_pixel_values(image, radius, intensity_factor):
                 draw_circle(image, col, row, radius)
                 used_pixels[row-radius:row+radius, col-radius:col+radius] = 255  # ทำเครื่องหมายว่าพิกัดนี้ถูกใช้แล้ว
                 # เพิ่มค่าสีให้กับพิกัดในพื้นที่ที่วงกลมอยู่โดยใช้ตัวดำเนินการบวก (+)
-                image[row-radius:row+radius, col-radius:col+radius] = image[row-radius:row+radius, col-radius:col+radius] + intensity_factor
+                image[row-radius//2:row+radius//2, col-radius//2:col+radius//2] = image[row-radius:row+radius, col-radius:col+radius] + intensity_factor
 
 # กำหนดพิกัดและขนาดของวงกลม
 radius = 59
